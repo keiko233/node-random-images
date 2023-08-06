@@ -62,11 +62,11 @@ function getRandomImagePath() {
   return config.imagePaths[randomIndex];
 }
 
-function getImagePath(imagePath, imageName) {
+function getImagePath(imagePath: string, imageName: string) {
   return path.join('/resources', imagePath, imageName);
 }
 
-function getImageUrl(imagePath, imageName) {
+function getImageUrl(imagePath: string, imageName: string) {
   return `http://localhost:${config.port}${getImagePath(imagePath, imageName)}`;
 }
 
