@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      background-image: var(--image);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #fed2d2;
+    }
+    div#app {
+      height: 80vh;
+      max-width: 568px;
+      margin: 8vh auto;
+      display: flex;
+      flex-direction: column;
+      background-color: #ececec5c;
+      padding: 2vh;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+    }
+    div#app .item {
+      background-color: #ffffff4d;
+      margin-top: 8px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    div#app .item p {
+      padding: 10px;
+    }
+    div#app code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background-color: #ffffffba;
+      float: right;
+    }
+    div#app .image-preview {
+      background-image: var(--image);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #fefefe;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+    div#app .image-preview button {
+      padding: 6px 18px;
+      margin: 0 10px 10px 0;
+      border-radius: 32px;
+      border: 2px solid #ffa4a48c;
+      background-color: #ff4e62;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    div#app .image-preview button:hover {
+      background-color: #e2001a;
+    }
+    div#app .image-preview .info {
+      width: 95%;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h3>使用帮助</h3>
+    <div class="item" v-for="(content, i) in contents" :key="i">
+      <p>{{ content.title }}<code>{{ content.code }}/</code></p>
+    </div>
+    <div class="image-preview">
+      <div class="info">image url: <code>{{ data.url }}</code></div>
+      <div>
+        <div><button type="button" v-for="list in path" @click="selsctPath(list.path)">{{ list.name }}</button></div>
+        <div style="float: right;">
+          <button type="button" @click="refresh">换一张</button>
+          <a :href="data.url" download>
+            <button>保存</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          contents: [
+            { title: '直接获取图片', code: window.location.origin },
+            { title: '获取Json response', code: window.location.origin + '/?m=json' },
+            { title: '获取base64处理后的 Json response', code: window.location.origin + '/?m=base' },
+            { title: '获取指定路径', code: window.location.origin + '/?p=example' },
+            { title: 'GitHub', code: 'https://github.com/keiko233/php-random-images' }
+          ],
+          data: { url: null, },
+          path: [],
+          selscted: 'images'
+        }
+      },
+      methods: {
+        insertImage(url) {
+          const insertImage = document.createElement('style');
+          insertImage.id = 'image';
+          insertImage.innerHTML = `:root{--image: url('${url}');}`;
+          document.head.appendChild(insertImage);
+        },
+        refresh() {
+          this.data.url = 'requesting...';
+          document.head.removeChild(document.getElementById('image'));
+          this.getImage();
+        },
+        getImage() {
+          fetch(this.contents[1].code + '&p=' + this.selscted)
+            .then((res) => res.json())
+            .then((res) => {
+              this.data.url = res.response[0].url;
+              this.insertImage(this.data.url);
+          })
+        },
+        getPathLists() {
+          fetch('/path.json')
+            .then((res) => res.json())
+            .then((res) => this.path = res)
+        },
+        selsctPath(path) {
+          console.log(path);
+          this.selscted = path;
+          this.getImage();
+        }
+      },
+      mounted() {
+        this.getImage();
+        this.getPathLists();
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

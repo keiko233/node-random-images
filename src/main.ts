@@ -45,6 +45,18 @@ router.get('/', (ctx) => {
   }
 });
 
+router.get('/help.html', async (ctx) => {
+  const htmlPath = path.join(process.cwd(), config.htmlPath);
+  ctx.type = 'html';
+  ctx.body = fs.createReadStream(htmlPath);
+});
+
+router.get('/help', async (ctx) => {
+  const htmlPath = path.join(process.cwd(), config.htmlPath);
+  ctx.type = 'html';
+  ctx.body = fs.createReadStream(htmlPath);
+});
+
 function getRandomImagePath() {
   const randomIndex = Math.floor(Math.random() * config.imagePaths.length);
   return config.imagePaths[randomIndex];
