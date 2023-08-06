@@ -1,0 +1,22 @@
+{
+  "name": "node-random-images",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "app": "ts-node ./src/main.ts"
+  },
+  "author": "keiko233",
+  "dependencies": {
+    "@types/koa": "^2.13.8",
+    "@types/koa-mount": "^4.0.2",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
+    "@types/node": "^20.4.8",
+    "koa": "^2.14.2",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}
