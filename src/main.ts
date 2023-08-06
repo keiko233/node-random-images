@@ -63,7 +63,7 @@ function getRandomImagePath() {
 }
 
 function getImagePath(imagePath, imageName) {
-  return path.join('/', imagePath, imageName);
+  return path.join('/resources', imagePath, imageName);
 }
 
 function getImageUrl(imagePath, imageName) {
