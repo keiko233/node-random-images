@@ -112,8 +112,7 @@
             { title: '获取指定路径', code: window.location.origin + '/?p=example' },
             { title: 'GitHub', code: 'https://github.com/keiko233/node-random-images' }
           ],
-          data: { url: null, },
-          selscted: 'images'
+          data: { url: null, }
         }
       },
       methods: {
@@ -129,7 +128,7 @@
           this.getImage();
         },
         getImage() {
-          fetch(this.contents[1].code + '&p=' + this.selscted)
+          fetch(this.contents[1].code)
             .then((res) => res.json())
             .then((res) => {
               this.data.url = res.response[0].url;
