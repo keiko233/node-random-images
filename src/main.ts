@@ -67,7 +67,7 @@ function getImagePath(imagePath: string, imageName: string) {
 }
 
 function getImageUrl(imagePath: string, imageName: string) {
-  return `${config.proxyUrl}:${config.port}${getImagePath(imagePath, imageName)}`;
+  return `${config.proxyUrl}${getImagePath(imagePath, imageName)}`;
 }
 
 app.use(mount('/resources', serve('data')));
