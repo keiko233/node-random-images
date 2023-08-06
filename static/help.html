@@ -91,7 +91,6 @@
     <div class="image-preview">
       <div class="info">image url: <code>{{ data.url }}</code></div>
       <div>
-        <div><button type="button" v-for="list in path" @click="selsctPath(list.path)">{{ list.name }}</button></div>
         <div style="float: right;">
           <button type="button" @click="refresh">换一张</button>
           <a :href="data.url" download>
@@ -114,7 +113,6 @@
             { title: 'GitHub', code: 'https://github.com/keiko233/node-random-images' }
           ],
           data: { url: null, },
-          path: [],
           selscted: 'images'
         }
       },
@@ -138,20 +136,9 @@
               this.insertImage(this.data.url);
           })
         },
-        getPathLists() {
-          fetch('/path.json')
-            .then((res) => res.json())
-            .then((res) => this.path = res)
-        },
-        selsctPath(path) {
-          console.log(path);
-          this.selscted = path;
-          this.getImage();
-        }
       },
       mounted() {
         this.getImage();
-        this.getPathLists();
       }
     }).mount('#app')
   </script>
