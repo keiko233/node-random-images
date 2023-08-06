@@ -1,7 +1,10 @@
 {
   "port": 3000,
   "imagePaths": [
-    "images"
+    {
+      "name": "Image",
+      "path": "images"
+    }
   ],
   "htmlPath": "static/help.html",
   "proxyUrl": "http://localhost:3000"

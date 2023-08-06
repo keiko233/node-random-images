@@ -57,9 +57,14 @@ router.get('/help', async (ctx) => {
   ctx.body = fs.createReadStream(htmlPath);
 });
 
+router.get('/path', async (ctx) => {
+  ctx.type = 'application/json';
+  ctx.body = config.imagePaths;
+});
+
 function getRandomImagePath() {
   const randomIndex = Math.floor(Math.random() * config.imagePaths.length);
-  return config.imagePaths[randomIndex];
+  return config.imagePaths[randomIndex].path;
 }
 
 function getImagePath(imagePath: string, imageName: string) {
