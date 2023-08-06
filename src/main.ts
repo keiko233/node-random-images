@@ -18,7 +18,7 @@ router.get('/', (ctx) => {
   const randomImage = images[randomIndex];
   const imagePath = path.join(imagesDir, randomImage);
 
-  if (ctx.query.m === 'json') {
+  if (ctx.query.m === 'json' || ctx.query.p) {
     const response = [
       {
         path: getImagePath(randomImagePath, randomImage),
