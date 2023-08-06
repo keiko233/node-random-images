@@ -3,5 +3,6 @@
   "imagePaths": [
     "images"
   ],
-  "htmlPath": "static/help.html"
+  "htmlPath": "static/help.html",
+  "proxyUrl": "http://localhost:3000"
 }

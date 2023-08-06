@@ -67,7 +67,7 @@ function getImagePath(imagePath: string, imageName: string) {
 }
 
 function getImageUrl(imagePath: string, imageName: string) {
-  return `http://localhost:${config.port}${getImagePath(imagePath, imageName)}`;
+  return `${config.proxyUrl}:${config.port}${getImagePath(imagePath, imageName)}`;
 }
 
 app.use(mount('/resources', serve('data')));
@@ -75,4 +75,5 @@ app.use(router.routes());
 
 app.listen(config.port, () => {
   console.log(`Server is running on http://localhost:${config.port}`);
+  console.log(`ProxyURL ${config.proxyUrl}`);
 });
