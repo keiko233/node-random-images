@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "app": "ts-node ./src/main.ts"
+    "app": "ts-node ./src/main.ts",
+    "build": "tsc"
   },
   "author": "keiko233",
   "dependencies": {
